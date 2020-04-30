@@ -1,7 +1,7 @@
 function init()
     love.window.setMode(900,700)
     love.graphics.setBackgroundColor(0,214,255)
-    world = love.physics.newWorld(0,500,false)
+    world = love.physics.newWorld(0,620,false)
     world:setCallbacks(beginContact,endContact, preSolve, postSolve)
 
     
@@ -19,31 +19,25 @@ function init()
     require('filehelper')
     require('player')
     require('helpers')
+    require('map')
 end 
-
 
 
 function love.load()
     init()
-    
+    get_total_levels()
+
     platforms ={}
     saveData = {}
     saveData.bestTime = 999
 
-    LoadData()
-
-    gameMap = sti("maps/Level_1.lua")
-
+    LoadSaveData()    
     resetPlayer()
 
-    for i, obj in pairs(gameMap.layers["Platform"].objects) do
-        spawnPlatform(obj.x, obj.y, obj.width,obj.height)
-    end 
+    gameMap = sti(map_loader.levels[map_loader.current_level])
 
-    for i, obj in pairs(gameMap.layers["Coins"].objects) do
-        SpawnCollectable(obj.x, obj.y)
-    end 
-
+    draw_platforms()
+    draw_collectables()
 end
 
 function love.update(dt)
@@ -53,6 +47,7 @@ function love.update(dt)
     CollectableUpdate(dt)
 
     cam:lookAt(player.body:getX(), love.graphics.getHeight() /2)
+
     for i,c in ipairs(collectables) do 
         c.animation:update(dt)
     end 
@@ -61,43 +56,23 @@ function love.update(dt)
         timer = timer + dt 
     end 
 
-    if #collectables == 0  and gameState == 2 then 
-        gameState = 1
-        player.body:setPosition(100,100)
-
-        if #collectables == 0 then 
-            for i, obj in pairs(gameMap.layers["Coins"].objects) do
-                SpawnCollectable(obj.x, obj.y)
-            end 
-
-        end 
-
-        if timer < saveData.bestTime then 
-            saveData.bestTime = math.floor(timer)
-            love.filesystem.write("data.lua",table.show(saveData,"saveData"))
-        end 
-    end 
+    Load_Level() 
 
     if player.body:getY() > 2000 then 
         player.body:setPosition(100,100)
     end 
-
-
 end 
 
 function love.draw()
     cam:attach()
 
-    gameMap:drawLayer(gameMap.layers["Foreground"])
-    gameMap:drawLayer(gameMap.layers["Scene"])
-
+    gameMap:drawLayer(gameMap.layers[map_loader.layers.foreground])
+    gameMap:drawLayer(gameMap.layers[map_loader.layers.scene])
 
     player.animation:draw(player.sprite, player.body:getX(),player.body:getY(),nil,player.direction,1,sprite.player_stand:getWidth()/2, sprite.player_stand:getHeight()/2)
 
+    CollectableDraw() 
 
-    for i,c in ipairs(collectables) do 
-        c.animation:draw(sprite.coin_sheet,c.x, c.y, nil, nil, nil, 20.5,21)
-    end 
 
     cam:detach()
 
@@ -108,8 +83,6 @@ function love.draw()
     end 
 
     love.graphics.print("Time: " ..  math.floor(timer) ,  10, 660)
-    love.graphics.print("Y: " ..  player.body:getY() ,  150, 660)
-    
 end 
 
 function love.keypressed(key,scancode,isrepeat)
@@ -123,15 +96,6 @@ function love.keypressed(key,scancode,isrepeat)
     end 
 end
 
-function spawnPlatform(x,y,width,height)
-    local platform = {}
-    platform.body = love.physics.newBody(world,x,y,"static")
-    platform.shape = love.physics.newRectangleShape(width/2, height/2, width, height)
-    platform.fixture = love.physics.newFixture(platform.body,platform.shape)
-    platform.width = width
-    platform.height = height
-    table.insert(platforms,platform)
-end 
 
 function beginContact(a,b,coll)
     player.grounded = true
