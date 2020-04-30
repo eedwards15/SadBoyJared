@@ -25,3 +25,9 @@ function CollectableUpdate(dt)
     end 
     
 end 
+
+function CollectableDraw()
+    for i,c in ipairs(collectables) do 
+        c.animation:draw(sprite.coin_sheet,c.x, c.y, nil, nil, nil, 20.5,21)
+    end 
+end 
