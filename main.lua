@@ -1,21 +1,15 @@
-function love.load()
+function init()
     love.window.setMode(900,700)
     love.graphics.setBackgroundColor(0,214,255)
-
     world = love.physics.newWorld(0,500,false)
     world:setCallbacks(beginContact,endContact, preSolve, postSolve)
 
-    gameState =1
+    
+    gameState = 1
     myfont = love.graphics.newFont(30)
     timer = 0
 
-
-    sprite = {}
-    sprite.coin_sheet = love.graphics.newImage("sprites/coin_sheet.png")
-    sprite.player_jump = love.graphics.newImage("sprites/player_jump.png")
-    sprite.player_stand = love.graphics.newImage("sprites/player_stand.png")
-    sprite.player_sprite = love.graphics.newImage("Assets/Player/p1_walk/spritesheet.png")
-
+    require('assetmanager')
     require('collectables')
     require('Libs.show')
     anim8 = require('Libs.anim8-master.anim8')
@@ -24,10 +18,15 @@ function love.load()
     cam = cameraFile()
     require('filehelper')
     require('player')
+    require('helpers')
+end 
 
 
+
+function love.load()
+    init()
+    
     platforms ={}
-
     saveData = {}
     saveData.bestTime = 999
 
@@ -35,7 +34,8 @@ function love.load()
 
     gameMap = sti("maps/Level_1.lua")
 
-     resetPlayer()
+    resetPlayer()
+
     for i, obj in pairs(gameMap.layers["Platform"].objects) do
         spawnPlatform(obj.x, obj.y, obj.width,obj.height)
     end 
@@ -141,6 +141,3 @@ function endContact(a,b,coll)
     player.grounded = false 
 end 
 
-function distanceBetween(x1,y1,x2,y2)
-    return math.sqrt((y2-y1)^2 + (x2-x1)^2)
-end
