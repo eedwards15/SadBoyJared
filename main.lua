@@ -16,7 +16,7 @@ function love.load()
     sprite.player_stand = love.graphics.newImage("sprites/player_stand.png")
     sprite.player_sprite = love.graphics.newImage("Assets/Player/p1_walk/spritesheet.png")
 
-    require('coin')
+    require('collectables')
     require('Libs.show')
     anim8 = require('Libs.anim8-master.anim8')
     sti = require("Libs.Simple-Tiled-Implementation-master/sti")
@@ -41,7 +41,7 @@ function love.load()
     end 
 
     for i, obj in pairs(gameMap.layers["Coins"].objects) do
-        spawnCoin(obj.x, obj.y)
+        SpawnCollectable(obj.x, obj.y)
     end 
 
 end
@@ -50,10 +50,10 @@ function love.update(dt)
     world:update(dt)
     playerUpdate(dt)
     gameMap:update(dt)
-    coinUpdate(dt)
+    CollectableUpdate(dt)
 
     cam:lookAt(player.body:getX(), love.graphics.getHeight() /2)
-    for i,c in ipairs(coins) do 
+    for i,c in ipairs(collectables) do 
         c.animation:update(dt)
     end 
 
@@ -61,13 +61,13 @@ function love.update(dt)
         timer = timer + dt 
     end 
 
-    if #coins == 0  and gameState == 2 then 
+    if #collectables == 0  and gameState == 2 then 
         gameState = 1
         player.body:setPosition(100,100)
 
-        if #coins == 0 then 
+        if #collectables == 0 then 
             for i, obj in pairs(gameMap.layers["Coins"].objects) do
-                spawnCoin(obj.x, obj.y)
+                SpawnCollectable(obj.x, obj.y)
             end 
 
         end 
@@ -95,7 +95,7 @@ function love.draw()
     player.animation:draw(player.sprite, player.body:getX(),player.body:getY(),nil,player.direction,1,sprite.player_stand:getWidth()/2, sprite.player_stand:getHeight()/2)
 
 
-    for i,c in ipairs(coins) do 
+    for i,c in ipairs(collectables) do 
         c.animation:draw(sprite.coin_sheet,c.x, c.y, nil, nil, nil, 20.5,21)
     end 
 
