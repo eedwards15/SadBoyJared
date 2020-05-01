@@ -6,10 +6,16 @@ map_loader.layers.collectable = "Coins"
 map_loader.layers.platform = "Platform"
 map_loader.layers.foreground = "Foreground"
 map_loader.layers.scene = "Scene"
-
-
+map_loader.layers.start = "Start"
 
 map_loader.levels = {"maps/Level_1.lua"}
+
+function start_location()
+    for i, obj in pairs(gameMap.layers[map_loader.layers.start].objects) do
+        return math.floor(obj.y)
+    end 
+end 
+
 
 
 function draw_collectables()
@@ -52,7 +58,7 @@ function Load_Level()
 
         if timer < saveData.bestTime then 
             saveData.bestTime = math.floor(timer)
-            saveData() 
+            SaveData() 
         end 
     end 
 
