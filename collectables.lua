@@ -4,8 +4,8 @@ function SpawnCollectable(x,y)
     local collectable = {}
     collectable.x = x
     collectable.y = y 
-    collectable.grid = anim8.newGrid(41,42,123,126)
-    collectable.animation = anim8.newAnimation(collectable.grid('1-3',1,'1-3',2,'1-2',3),0.08)
+    collectable.grid = anim8.newGrid(40,40,40,40)
+    collectable.animation = anim8.newAnimation(collectable.grid('1-1',1),1)
     collectable.collected = false
     table.insert(collectables,collectable)
 end

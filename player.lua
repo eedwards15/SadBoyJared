@@ -1,18 +1,29 @@
 player = {}
 
-player.startx = 100
-player.starty = 100 
-player.body = love.physics.newBody(world,player.startx,player.starty, "dynamic")
-player.shape = love.physics.newRectangleShape(66,92)
-player.fixture = love.physics.newFixture(player.body,player.shape)
+player.startx = 0
+player.starty = 0
 player.speed = 200
-player.grounded = false 
 player.direction = 1
+player.body = nil 
+player.shape = nil
+player.fixture = nil
+player.grounded = false 
 player.sprite = sprite.player_sprite
 player.frame = 0 
-player.grid = anim8.newGrid(72,97,player.sprite:getWidth(),player.sprite:getHeight())
-player.animation =  anim8.newAnimation(player.grid('1-11',1),.1)
-player.body:setFixedRotation(true)
+player.grid = anim8.newGrid(70,92,player.sprite:getWidth(),player.sprite:getHeight())
+player.animation =  anim8.newAnimation(player.grid('1-1',1),.1)
+
+
+
+function Player_Init()
+    player.starty = start_location() 
+    player.body = love.physics.newBody(world,player.startx,player.starty, "dynamic")
+    player.body:setFixedRotation(true)
+    player.shape = love.physics.newRectangleShape(70,92)
+    love.physics.newFixture(player.body,player.shape)
+end 
+
+
 
 function resetPlayer()
     -- local start = gameMap.layers["Start"].objects
