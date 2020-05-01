@@ -15,8 +15,8 @@ player.animation =  anim8.newAnimation(player.grid('1-1',1),.1)
 
 
 
-function Player_Init()
-    player.starty = start_location() 
+function player_init()
+    player.starty,player.startx = start_location() 
     player.body = love.physics.newBody(world,player.startx,player.starty, "dynamic")
     player.body:setFixedRotation(true)
     player.shape = love.physics.newRectangleShape(70,92)
@@ -47,12 +47,5 @@ function playerUpdate(dt)
             player.animation:update(dt)
         end 
     end 
-    
-    -- if player.grounded == true then 
-    --     player.sprite = sprite.player_stand
-    -- else 
-    --     player.sprite = sprite.player_jump
-    -- end
-
-   
+       
 end 

@@ -35,7 +35,7 @@ function love.load()
     --This needs to be after the game map has been loaded. 
     world = love.physics.newWorld(0,620,false)
     world:setCallbacks(beginContact,endContact, preSolve, postSolve)
-    Player_Init()
+    player_init()
 
     draw_platforms()
     draw_collectables()

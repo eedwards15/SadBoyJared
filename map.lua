@@ -12,7 +12,7 @@ map_loader.levels = {"maps/Level_1.lua"}
 
 function start_location()
     for i, obj in pairs(gameMap.layers[map_loader.layers.start].objects) do
-        return math.floor(obj.y)
+        return math.floor(obj.y), math.floor(obj.x)
     end 
 end 
 
