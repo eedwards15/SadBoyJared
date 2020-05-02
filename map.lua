@@ -59,6 +59,7 @@ function load_level()
         end 
 
         if #collectables == 0 then 
+            audio.player.win:play()
             remove_enemies()
             draw_collectables()
             draw_platforms()

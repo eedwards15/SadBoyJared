@@ -14,6 +14,7 @@ function collectable_update(dt)
     for i,collectable in ipairs(collectables) do 
         if distance_between(collectable.x,collectable.y,player.body:getX(),player.body:getY()) < 50 then
             collectable.collected = true
+            audio.player.pickup:play()
         end 
     end 
 

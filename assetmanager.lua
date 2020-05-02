@@ -12,3 +12,5 @@
     audio.player = {} 
     audio.player.jump = love.audio.newSource("Assets/Audio/Jump.wav", "static")
     audio.player.death  = love.audio.newSource("Assets/Audio/Death.wav", "static")
+    audio.player.pickup = love.audio.newSource("Assets/Audio/126413__cabeeno-rossley__collect-special-coin.wav","static")
+    audio.player.win = love.audio.newSource("Assets/Audio/176748__onioneye__bong-hit.mp3", "static")
