@@ -7,6 +7,7 @@ map_loader.layers.platform = "Platform"
 map_loader.layers.foreground = "Foreground"
 map_loader.layers.scene = "Scene"
 map_loader.layers.start = "Start"
+map_loader.layers.enemy_path = "EnemyPath"
 
 map_loader.levels = {"maps/Level_1.lua"}
 
@@ -25,6 +26,14 @@ end
 function draw_platforms()
     for i, obj in pairs(gameMap.layers[map_loader.layers.platform].objects) do
         spawn_platform(obj.x, obj.y, obj.width,obj.height)
+    end 
+end 
+
+function add_enemy()
+    for i, obj in pairs(gameMap.layers[map_loader.layers.enemy_path].objects) do
+        local height = obj.y + (obj.height /2)
+        local endloc = obj.x + obj.width
+        spawn_enemy(obj.x, height, endloc)
     end 
 end 
 
@@ -52,6 +61,7 @@ function load_level()
         if #collectables == 0 then 
             draw_collectables()
             draw_platforms()
+            add_enemy() 
         end 
 
         if timer < saveData.bestTime then 

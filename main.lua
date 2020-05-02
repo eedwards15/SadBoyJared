@@ -18,7 +18,7 @@ function init()
     require('map')
     require('player')
     require('helpers')
-
+    require('enemies')
     src2 = love.audio.newSource("Assets/Audio/Music.wav", "stream")
     src2:setVolume(0.1)     
     src2:setLooping(true)
@@ -45,6 +45,7 @@ function love.load()
 
     draw_platforms()
     draw_collectables()
+    add_enemy() 
 end
 
 function love.update(dt)
@@ -52,12 +53,18 @@ function love.update(dt)
     playerUpdate(dt)
     gameMap:update(dt)
     collectable_update(dt)
-
+    enemies_update(dt)
+    
     cam:lookAt(player.body:getX(), love.graphics.getHeight() /2)
 
     for i,c in ipairs(collectables) do 
         c.animation:update(dt)
     end 
+
+    for i,c in ipairs(enemies) do 
+        c.animation:update(dt)
+    end 
+
 
     if gameState == 2 then 
         timer = timer + dt 
@@ -81,6 +88,8 @@ function love.draw()
     player.animation:draw(player.sprite, player.body:getX(),player.body:getY(),nil,player.direction,1,sprite.player_sprite:getWidth()/2, sprite.player_sprite:getHeight()/2)
 
     collectable_draw() 
+
+    enemies_draw() 
     cam:detach()
 
     if gameState == 1 then 
