@@ -54,7 +54,7 @@ function love.update(dt)
     gameMap:update(dt)
     collectable_update(dt)
     enemies_update(dt)
-    
+
     cam:lookAt(player.body:getX(), love.graphics.getHeight() /2)
 
     for i,c in ipairs(collectables) do 
@@ -72,7 +72,7 @@ function love.update(dt)
 
     load_level() 
 
-    if player.body:getY() > 2000 then 
+    if player.body:getY() > 1200 then 
         player.body:setPosition(100,100)
         audio.player.death:setVolume(1)
         audio.player.death:play()

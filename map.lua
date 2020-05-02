@@ -31,8 +31,8 @@ end
 
 function add_enemy()
     for i, obj in pairs(gameMap.layers[map_loader.layers.enemy_path].objects) do
-        local height = obj.y + (obj.height /2)
-        local endloc = obj.x + obj.width
+        local height = math.floor( obj.y + (obj.height /2))
+        local endloc = math.floor( obj.x + obj.width )
         spawn_enemy(obj.x, height, endloc)
     end 
 end 
@@ -59,6 +59,7 @@ function load_level()
         end 
 
         if #collectables == 0 then 
+            remove_enemies()
             draw_collectables()
             draw_platforms()
             add_enemy() 

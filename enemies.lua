@@ -2,7 +2,7 @@ enemies = {}
 
 function spawn_enemy(x,y, endLocation)
     local enemy = {}
-    enemy.start = x
+    enemy.start = x -1
     enemy.endlocation = endLocation
     enemy.x = x
     enemy.y = y 
@@ -25,27 +25,35 @@ function enemies_update(dt)
     if gameState == 2 then 
         for i,enemy in ipairs(enemies) do 
 
-                if enemy.x >= math.floor(enemy.endlocation) and enemy.direction == 1 then 
-                    enemy.direction = -1
-                end 
-
-                if enemy.x <= math.floor(enemy.start) and enemy.direction == -1 then 
-                    enemy.direction = 1
-                end 
-
-
-                if enemy.x <= enemy.endlocation and enemy.direction == 1 then 
+                if enemy.x < enemy.endlocation and enemy.direction == 1 then 
                     enemy.x = enemy.x + enemy.speed * dt
                 end 
 
-                if enemy.x >=  enemy.start and enemy.direction == -1 then 
-                    enemy.x = enemy.x - enemy.speed * dt
+                if enemy.x >= enemy.endlocation and enemy.direction == 1 then 
+                    enemy.direction = -1
                 end 
 
 
-     
+                if enemy.x > enemy.start and enemy.direction == -1 then 
+                    enemy.x = enemy.x - enemy.speed * dt
+                end 
+
+                if enemy.x <= enemy.start and enemy.direction == -1 then 
+                    enemy.direction = 1
+                end 
+                
+                if enemy.direction == nil then 
+                    enemy.direction = 1
+                end 
 
         end 
     end 
        
+end 
+
+function remove_enemies()
+
+    for i=#enemies,1,-1 do
+        table.remove(enemies,i)
+    end   
 end 
