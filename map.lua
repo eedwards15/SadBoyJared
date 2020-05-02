@@ -20,7 +20,7 @@ end
 
 function draw_collectables()
     for i, obj in pairs(gameMap.layers[map_loader.layers.collectable].objects) do
-        SpawnCollectable(obj.x, obj.y)
+        spawn_collectable(obj.x, obj.y)
     end 
 end 
 
@@ -41,7 +41,7 @@ function spawnPlatform(x,y,width,height)
     table.insert(platforms,platform)
 end 
 
-function Load_Level()
+function load_level()
     if #collectables == 0  and gameState == 2 then 
         gameState = 1
         player.body:setPosition(100,100)
@@ -58,7 +58,7 @@ function Load_Level()
 
         if timer < saveData.bestTime then 
             saveData.bestTime = math.floor(timer)
-            SaveData() 
+            save_data() 
         end 
     end 
 
