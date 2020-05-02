@@ -23,8 +23,6 @@ function init()
     src2:setVolume(0.1)     
     src2:setLooping(true)
     src2:play()
-
-
 end 
 
 

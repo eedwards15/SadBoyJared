@@ -22,8 +22,7 @@ function collectable_update(dt)
         if c.collected == true then 
             table.remove(collectables,i)
         end
-    end 
-    
+    end   
 end 
 
 function collectable_draw()

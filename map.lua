@@ -16,8 +16,6 @@ function start_location()
     end 
 end 
 
-
-
 function draw_collectables()
     for i, obj in pairs(gameMap.layers[map_loader.layers.collectable].objects) do
         spawn_collectable(obj.x, obj.y)
@@ -26,12 +24,12 @@ end
 
 function draw_platforms()
     for i, obj in pairs(gameMap.layers[map_loader.layers.platform].objects) do
-        spawnPlatform(obj.x, obj.y, obj.width,obj.height)
+        spawn_platform(obj.x, obj.y, obj.width,obj.height)
     end 
 end 
 
 
-function spawnPlatform(x,y,width,height)
+function spawn_platform(x,y,width,height)
     local platform = {}
     platform.body = love.physics.newBody(world,x,y,"static")
     platform.shape = love.physics.newRectangleShape(width/2, height/2, width, height)
