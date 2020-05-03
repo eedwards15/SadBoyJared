@@ -82,12 +82,11 @@ end
 function love.draw()
     cam:attach()
 
+    collectable_draw() 
+    player.animation:draw(player.sprite, player.body:getX(),player.body:getY(),nil,player.direction,1,sprite.player_sprite:getWidth()/2, sprite.player_sprite:getHeight()/2)
     gameMap:drawLayer(gameMap.layers[map_loader.layers.foreground])
     gameMap:drawLayer(gameMap.layers[map_loader.layers.scene])
 
-    player.animation:draw(player.sprite, player.body:getX(),player.body:getY(),nil,player.direction,1,sprite.player_sprite:getWidth()/2, sprite.player_sprite:getHeight()/2)
-
-    collectable_draw() 
 
     enemies_draw() 
     cam:detach()
