@@ -54,7 +54,6 @@ function spawn_platform(x,y,width,height)
     table.insert(platforms,platform)
 end 
 
-
 function level_complete()
     if #collectables == 0  and gameState == 2 then 
         audio.player.win:play()
@@ -82,17 +81,17 @@ function next_level()
 end 
 
 function load_level()
+    play_level_background_music() 
 
-        world = love.physics.newWorld(0,620,false)
-        world:setCallbacks(beginContact,endContact, preSolve, postSolve)
-        player_init()
+    world = love.physics.newWorld(0,620,false)
+    world:setCallbacks(beginContact,endContact, preSolve, postSolve)
+    player_init()
 
-        add_collectables()
-        add_platforms()
-        add_enemy() 
+    add_collectables()
+    add_platforms()
+    add_enemy() 
 
-
-        player.body:setPosition(100,100)
+    player.body:setPosition(100,100)
 end
 
 function get_total_levels()
@@ -100,3 +99,15 @@ function get_total_levels()
         map_loader.total_levels = map_loader.total_levels  + 1
     end
 end 
+
+function play_level_background_music()
+    if backgroundMusic ~= nil then 
+        backgroundMusic:stop() 
+    end 
+
+    backgroundMusic = love.audio.newSource("Assets/Audio/Music.wav", "stream")
+    backgroundMusic:setVolume(0.1)     
+    backgroundMusic:setLooping(true)
+    backgroundMusic:play()
+end
+

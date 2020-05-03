@@ -13,8 +13,6 @@ player.frame = 0
 player.grid = anim8.newGrid(70,92,player.sprite:getWidth(),player.sprite:getHeight())
 player.animation =  anim8.newAnimation(player.grid('1-1',1),.1)
 
-
-
 function player_init()
     player.starty,player.startx = start_location() 
     player.body = love.physics.newBody(world,player.startx,player.starty, "dynamic")
@@ -22,8 +20,6 @@ function player_init()
     player.shape = love.physics.newRectangleShape(70,92)
     love.physics.newFixture(player.body,player.shape)
 end 
-
-
 
 function resetPlayer()
     player.body:setPosition(100,100)
