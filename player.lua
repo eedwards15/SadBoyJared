@@ -26,11 +26,13 @@ end
 
 
 function resetPlayer()
-    -- local start = gameMap.layers["Start"].objects
-    player.startx = 100
-    player.starty = 100
+    player.body:setPosition(100,100)
 end 
 
+function death_by_dea()
+    resetPlayer()
+    audio.player.death_dea:play()
+end 
 
 function playerUpdate(dt)
     

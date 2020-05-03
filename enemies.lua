@@ -46,7 +46,12 @@ function enemies_update(dt)
                     enemy.direction = 1
                 end 
 
+                if distance_between(enemy.x,enemy.y,player.body:getX(),player.body:getY()) < 50 then
+                    death_by_dea()   
+                end 
         end 
+
+
     end 
        
 end 
