@@ -18,13 +18,13 @@ function start_location()
     end 
 end 
 
-function draw_collectables()
+function add_collectables()
     for i, obj in pairs(gameMap.layers[map_loader.layers.collectable].objects) do
         spawn_collectable(obj.x, obj.y)
     end 
 end 
 
-function draw_platforms()
+function add_platforms()
     for i, obj in pairs(gameMap.layers[map_loader.layers.platform].objects) do
         spawn_platform(obj.x, obj.y, obj.width,obj.height)
     end 
@@ -54,11 +54,22 @@ function spawn_platform(x,y,width,height)
     table.insert(platforms,platform)
 end 
 
-function load_level()
+
+function level_complete()
     if #collectables == 0  and gameState == 2 then 
-
         audio.player.win:play()
+       
+        if timer < saveData.bestTime then 
+            saveData.bestTime = math.floor(timer)
+            save_data() 
+        end 
 
+        next_level()
+
+    end 
+end 
+
+function next_level()
         remove_enemies()
         remove_platforms()
 
@@ -67,26 +78,21 @@ function load_level()
             gameMap = sti(map_loader.levels[map_loader.current_level])            
         end 
 
+        load_level()
+end 
+
+function load_level()
 
         world = love.physics.newWorld(0,620,false)
         world:setCallbacks(beginContact,endContact, preSolve, postSolve)
         player_init()
 
-
-
-        draw_collectables()
-        draw_platforms()
+        add_collectables()
+        add_platforms()
         add_enemy() 
 
 
-        if timer < saveData.bestTime then 
-            saveData.bestTime = math.floor(timer)
-            save_data() 
-        end 
-
         player.body:setPosition(100,100)
-    end 
-
 end
 
 function get_total_levels()

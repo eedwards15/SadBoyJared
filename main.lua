@@ -38,18 +38,20 @@ function love.load()
 
     gameMap = sti(map_loader.levels[map_loader.current_level])
 
-    --This needs to be after the game map has been loaded. 
-    world = love.physics.newWorld(0,620,false)
-    world:setCallbacks(beginContact,endContact, preSolve, postSolve)
-    player_init()
+    -- --This needs to be after the game map has been loaded. 
+    -- world = love.physics.newWorld(0,620,false)
+    -- world:setCallbacks(beginContact,endContact, preSolve, postSolve)
+    -- player_init()
 
-    draw_platforms()
-    draw_collectables()
-    add_enemy() 
+    -- add_platforms()
+    -- add_collectables()
+    -- add_enemy() 
+
+    load_level()
 end
 
 function love.update(dt)
-    load_level() 
+    level_complete()
 
     world:update(dt)
     playerUpdate(dt)
