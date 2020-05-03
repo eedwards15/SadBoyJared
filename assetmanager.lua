@@ -5,9 +5,6 @@
     sprite.player_sprite = love.graphics.newImage("Assets/Player/player_1.png")
     sprite.dea_walking = love.graphics.newImage("Assets/Enemies/DEA_Walking.png")
 
-
-
-
     audio = {}
     audio.player = {} 
     audio.player.jump = love.audio.newSource("Assets/Audio/Jump.wav", "static")

@@ -64,7 +64,7 @@
   <object id="70" x="5887.59" y="283.756" width="67.1693" height="65.7985"/>
   <object id="71" x="6023.3" y="281.014" width="74.0233" height="65.7985"/>
   <object id="72" x="6169.98" y="278.273" width="64.4277" height="68.5401"/>
-  <object id="73" x="6441.4" y="276.902" width="64.4277" height="72.6525"/>
+  <object id="73" x="6475.67" y="281.014" width="42.4949" height="37.0117"/>
  </objectgroup>
  <layer id="1" name="Foreground" width="100" height="10">
   <data encoding="base64">

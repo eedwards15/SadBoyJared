@@ -30,7 +30,7 @@ function love.load()
     init()
     get_total_levels()
 
-    platforms = {}
+
     saveData = {}
     saveData.bestTime = 999
 
@@ -49,9 +49,12 @@ function love.load()
 end
 
 function love.update(dt)
+    load_level() 
+
     world:update(dt)
     playerUpdate(dt)
     gameMap:update(dt)
+    
     collectable_update(dt)
     enemies_update(dt)
 
@@ -70,7 +73,6 @@ function love.update(dt)
         timer = timer + dt 
     end 
 
-    load_level() 
 
     if player.body:getY() > 1200 then 
         player.body:setPosition(100,100)
@@ -86,7 +88,6 @@ function love.draw()
     player.animation:draw(player.sprite, player.body:getX(),player.body:getY(),nil,player.direction,1,sprite.player_sprite:getWidth()/2, sprite.player_sprite:getHeight()/2)
     gameMap:drawLayer(gameMap.layers[map_loader.layers.foreground])
     gameMap:drawLayer(gameMap.layers[map_loader.layers.scene])
-
 
     enemies_draw() 
     cam:detach()
@@ -112,7 +113,6 @@ function love.keypressed(key,scancode,isrepeat)
         timer = 0 
     end 
 end
-
 
 function beginContact(a,b,coll)
     player.grounded = true
