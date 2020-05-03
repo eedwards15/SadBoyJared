@@ -1,6 +1,6 @@
 collectables = {}
 
-function SpawnCollectable(x,y)
+function spawn_collectable(x,y)
     local collectable = {}
     collectable.x = x
     collectable.y = y 
@@ -10,10 +10,11 @@ function SpawnCollectable(x,y)
     table.insert(collectables,collectable)
 end
 
-function CollectableUpdate(dt)
+function collectable_update(dt)
     for i,collectable in ipairs(collectables) do 
-        if distanceBetween(collectable.x,collectable.y,player.body:getX(),player.body:getY()) < 50 then
+        if distance_between(collectable.x,collectable.y,player.body:getX(),player.body:getY()) < 50 then
             collectable.collected = true
+            audio.player.pickup:play()
         end 
     end 
 
@@ -22,11 +23,10 @@ function CollectableUpdate(dt)
         if c.collected == true then 
             table.remove(collectables,i)
         end
-    end 
-    
+    end   
 end 
 
-function CollectableDraw()
+function collectable_draw()
     for i,c in ipairs(collectables) do 
         c.animation:draw(sprite.coin_sheet,c.x, c.y, nil, nil, nil, 20.5,21)
     end 

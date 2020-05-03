@@ -7,31 +7,38 @@ map_loader.layers.platform = "Platform"
 map_loader.layers.foreground = "Foreground"
 map_loader.layers.scene = "Scene"
 map_loader.layers.start = "Start"
+map_loader.layers.enemy_path = "EnemyPath"
 
 map_loader.levels = {"maps/Level_1.lua"}
 
 function start_location()
     for i, obj in pairs(gameMap.layers[map_loader.layers.start].objects) do
-        return math.floor(obj.y)
+        return math.floor(obj.y), math.floor(obj.x)
     end 
 end 
 
-
-
 function draw_collectables()
     for i, obj in pairs(gameMap.layers[map_loader.layers.collectable].objects) do
-        SpawnCollectable(obj.x, obj.y)
+        spawn_collectable(obj.x, obj.y)
     end 
 end 
 
 function draw_platforms()
     for i, obj in pairs(gameMap.layers[map_loader.layers.platform].objects) do
-        spawnPlatform(obj.x, obj.y, obj.width,obj.height)
+        spawn_platform(obj.x, obj.y, obj.width,obj.height)
+    end 
+end 
+
+function add_enemy()
+    for i, obj in pairs(gameMap.layers[map_loader.layers.enemy_path].objects) do
+        local height = math.floor( obj.y + (obj.height /2))
+        local endloc = math.floor( obj.x + obj.width )
+        spawn_enemy(obj.x, height, endloc)
     end 
 end 
 
 
-function spawnPlatform(x,y,width,height)
+function spawn_platform(x,y,width,height)
     local platform = {}
     platform.body = love.physics.newBody(world,x,y,"static")
     platform.shape = love.physics.newRectangleShape(width/2, height/2, width, height)
@@ -41,7 +48,7 @@ function spawnPlatform(x,y,width,height)
     table.insert(platforms,platform)
 end 
 
-function Load_Level()
+function load_level()
     if #collectables == 0  and gameState == 2 then 
         gameState = 1
         player.body:setPosition(100,100)
@@ -52,13 +59,16 @@ function Load_Level()
         end 
 
         if #collectables == 0 then 
+            audio.player.win:play()
+            remove_enemies()
             draw_collectables()
             draw_platforms()
+            add_enemy() 
         end 
 
         if timer < saveData.bestTime then 
             saveData.bestTime = math.floor(timer)
-            SaveData() 
+            save_data() 
         end 
     end 
 

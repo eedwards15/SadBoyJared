@@ -1,5 +1,6 @@
 function init()
     love.window.setMode(900,700)
+    love.window.setTitle("Sad Boy Jared")
     love.graphics.setBackgroundColor(0,214,255)
 
     gameState = 1
@@ -17,6 +18,11 @@ function init()
     require('map')
     require('player')
     require('helpers')
+    require('enemies')
+    src2 = love.audio.newSource("Assets/Audio/Music.wav", "stream")
+    src2:setVolume(0.1)     
+    src2:setLooping(true)
+    src2:play()
 end 
 
 
@@ -28,24 +34,26 @@ function love.load()
     saveData = {}
     saveData.bestTime = 999
 
-    LoadSaveData()    
+    load_save_data()    
 
     gameMap = sti(map_loader.levels[map_loader.current_level])
 
     --This needs to be after the game map has been loaded. 
     world = love.physics.newWorld(0,620,false)
     world:setCallbacks(beginContact,endContact, preSolve, postSolve)
-    Player_Init()
+    player_init()
 
     draw_platforms()
     draw_collectables()
+    add_enemy() 
 end
 
 function love.update(dt)
     world:update(dt)
     playerUpdate(dt)
     gameMap:update(dt)
-    CollectableUpdate(dt)
+    collectable_update(dt)
+    enemies_update(dt)
 
     cam:lookAt(player.body:getX(), love.graphics.getHeight() /2)
 
@@ -53,26 +61,34 @@ function love.update(dt)
         c.animation:update(dt)
     end 
 
+    for i,c in ipairs(enemies) do 
+        c.animation:update(dt)
+    end 
+
+
     if gameState == 2 then 
         timer = timer + dt 
     end 
 
-    Load_Level() 
+    load_level() 
 
-    if player.body:getY() > 2000 then 
+    if player.body:getY() > 1200 then 
         player.body:setPosition(100,100)
+        audio.player.death:setVolume(1)
+        audio.player.death:play()
     end 
 end 
 
 function love.draw()
     cam:attach()
 
+    collectable_draw() 
+    player.animation:draw(player.sprite, player.body:getX(),player.body:getY(),nil,player.direction,1,sprite.player_sprite:getWidth()/2, sprite.player_sprite:getHeight()/2)
     gameMap:drawLayer(gameMap.layers[map_loader.layers.foreground])
     gameMap:drawLayer(gameMap.layers[map_loader.layers.scene])
 
-    player.animation:draw(player.sprite, player.body:getX(),player.body:getY(),nil,player.direction,1,sprite.player_sprite:getWidth()/2, sprite.player_sprite:getHeight()/2)
 
-    CollectableDraw() 
+    enemies_draw() 
     cam:detach()
 
     if gameState == 1 then 
@@ -87,6 +103,8 @@ end
 function love.keypressed(key,scancode,isrepeat)
     if key == "space" and player.grounded == true then 
         player.body:applyLinearImpulse(0,-2500)
+        audio.player.jump:setVolume(1.3)
+        audio.player.jump:play()
     end 
 
     if gameState == 1 then 
