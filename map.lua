@@ -8,7 +8,7 @@ map_loader.layers.foreground = "Foreground"
 map_loader.layers.scene = "Scene"
 map_loader.layers.start = "Start"
 map_loader.layers.enemy_path = "EnemyPath"
-map_loader.levels = {"maps/Level_1.lua","maps/Level_2.lua"}
+map_loader.levels = {"maps/Level_1.lua","maps/Level_2.lua", "maps/Win.lua"}
 
 platforms = {}
 

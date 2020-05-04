@@ -15,6 +15,7 @@ player.animation =  anim8.newAnimation(player.grid('1-1',1),.1)
 
 function player_init()
     player.starty,player.startx = start_location() 
+    print(player.startx)
     player.body = love.physics.newBody(world,player.startx,player.starty, "dynamic")
     player.body:setFixedRotation(true)
     player.shape = love.physics.newRectangleShape(70,92)
