@@ -46,13 +46,19 @@ function enemies_update(dt)
                     enemy.direction = 1
                 end 
 
+                check_collison_with_player(enemy) 
         end 
-    end 
-       
+    end    
 end 
 
-function remove_enemies()
+function check_collison_with_player(enemy)
+    if distance_between(enemy.x,enemy.y,player.body:getX(),player.body:getY()) < 50 then
+        death_by_dea()   
+    end
+end 
 
+
+function remove_enemies()
     for i=#enemies,1,-1 do
         table.remove(enemies,i)
     end   

@@ -19,10 +19,7 @@ function init()
     require('player')
     require('helpers')
     require('enemies')
-    src2 = love.audio.newSource("Assets/Audio/Music.wav", "stream")
-    src2:setVolume(0.1)     
-    src2:setLooping(true)
-    src2:play()
+
 end 
 
 
@@ -30,28 +27,23 @@ function love.load()
     init()
     get_total_levels()
 
-    platforms = {}
+
     saveData = {}
     saveData.bestTime = 999
 
     load_save_data()    
 
     gameMap = sti(map_loader.levels[map_loader.current_level])
-
-    --This needs to be after the game map has been loaded. 
-    world = love.physics.newWorld(0,620,false)
-    world:setCallbacks(beginContact,endContact, preSolve, postSolve)
-    player_init()
-
-    draw_platforms()
-    draw_collectables()
-    add_enemy() 
+    load_level()
 end
 
 function love.update(dt)
+    level_complete()
+
     world:update(dt)
     playerUpdate(dt)
     gameMap:update(dt)
+    
     collectable_update(dt)
     enemies_update(dt)
 
@@ -70,7 +62,6 @@ function love.update(dt)
         timer = timer + dt 
     end 
 
-    load_level() 
 
     if player.body:getY() > 1200 then 
         player.body:setPosition(100,100)
@@ -87,7 +78,6 @@ function love.draw()
     gameMap:drawLayer(gameMap.layers[map_loader.layers.foreground])
     gameMap:drawLayer(gameMap.layers[map_loader.layers.scene])
 
-
     enemies_draw() 
     cam:detach()
 
@@ -97,7 +87,9 @@ function love.draw()
         love.graphics.printf("Best Time " .. saveData.bestTime, 0, 150, love.graphics.getWidth(), "center")
     end 
 
-    love.graphics.print("Time: " ..  math.floor(timer) ,  10, 660)
+    love.graphics.print("Time: " ..  math.floor(timer) ,  10, 20)
+    love.graphics.print("Found: " .. collectables.found, 230, 20)
+    love.graphics.print("Total: " .. collectables.total, 400, 20)
 end 
 
 function love.keypressed(key,scancode,isrepeat)
@@ -112,7 +104,6 @@ function love.keypressed(key,scancode,isrepeat)
         timer = 0 
     end 
 end
-
 
 function beginContact(a,b,coll)
     player.grounded = true

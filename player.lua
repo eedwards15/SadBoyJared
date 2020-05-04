@@ -13,24 +13,23 @@ player.frame = 0
 player.grid = anim8.newGrid(70,92,player.sprite:getWidth(),player.sprite:getHeight())
 player.animation =  anim8.newAnimation(player.grid('1-1',1),.1)
 
-
-
 function player_init()
     player.starty,player.startx = start_location() 
+    print(player.startx)
     player.body = love.physics.newBody(world,player.startx,player.starty, "dynamic")
     player.body:setFixedRotation(true)
     player.shape = love.physics.newRectangleShape(70,92)
     love.physics.newFixture(player.body,player.shape)
 end 
 
-
-
 function resetPlayer()
-    -- local start = gameMap.layers["Start"].objects
-    player.startx = 100
-    player.starty = 100
+    player.body:setPosition(100,100)
 end 
 
+function death_by_dea()
+    resetPlayer()
+    audio.player.death_dea:play()
+end 
 
 function playerUpdate(dt)
     

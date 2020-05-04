@@ -8,8 +8,9 @@ map_loader.layers.foreground = "Foreground"
 map_loader.layers.scene = "Scene"
 map_loader.layers.start = "Start"
 map_loader.layers.enemy_path = "EnemyPath"
+map_loader.levels = {"maps/Level_1.lua","maps/Level_2.lua", "maps/Win.lua"}
 
-map_loader.levels = {"maps/Level_1.lua"}
+platforms = {}
 
 function start_location()
     for i, obj in pairs(gameMap.layers[map_loader.layers.start].objects) do
@@ -17,16 +18,22 @@ function start_location()
     end 
 end 
 
-function draw_collectables()
+function add_collectables()
     for i, obj in pairs(gameMap.layers[map_loader.layers.collectable].objects) do
         spawn_collectable(obj.x, obj.y)
     end 
 end 
 
-function draw_platforms()
+function add_platforms()
     for i, obj in pairs(gameMap.layers[map_loader.layers.platform].objects) do
         spawn_platform(obj.x, obj.y, obj.width,obj.height)
     end 
+end 
+
+function remove_platforms()
+    for i=#platforms,1,-1 do
+        table.remove(platforms,i)
+     end   
 end 
 
 function add_enemy()
@@ -36,7 +43,6 @@ function add_enemy()
         spawn_enemy(obj.x, height, endloc)
     end 
 end 
-
 
 function spawn_platform(x,y,width,height)
     local platform = {}
@@ -48,30 +54,44 @@ function spawn_platform(x,y,width,height)
     table.insert(platforms,platform)
 end 
 
-function load_level()
+function level_complete()
     if #collectables == 0  and gameState == 2 then 
-        gameState = 1
-        player.body:setPosition(100,100)
-
-        if map_loader.current_level < map_loader.total_levels then 
-            map_loader.current_level = map_loader.current_level + 1
-            gameMap = sti(map_loader.levels[map_loader.current_level])
-        end 
-
-        if #collectables == 0 then 
-            audio.player.win:play()
-            remove_enemies()
-            draw_collectables()
-            draw_platforms()
-            add_enemy() 
-        end 
-
+        audio.player.win:play()
+       
         if timer < saveData.bestTime then 
             saveData.bestTime = math.floor(timer)
             save_data() 
         end 
-    end 
 
+        next_level()
+
+    end 
+end 
+
+function next_level()
+        remove_enemies()
+        remove_platforms()
+
+        if map_loader.current_level < map_loader.total_levels then 
+            map_loader.current_level = map_loader.current_level + 1
+            gameMap = sti(map_loader.levels[map_loader.current_level])            
+        end 
+
+        load_level()
+end 
+
+function load_level()
+    play_level_background_music() 
+
+    world = love.physics.newWorld(0,620,false)
+    world:setCallbacks(beginContact,endContact, preSolve, postSolve)
+    player_init()
+
+    add_collectables()
+    add_platforms()
+    add_enemy() 
+
+    player.body:setPosition(100,100)
 end
 
 function get_total_levels()
@@ -79,3 +99,15 @@ function get_total_levels()
         map_loader.total_levels = map_loader.total_levels  + 1
     end
 end 
+
+function play_level_background_music()
+    if backgroundMusic ~= nil then 
+        backgroundMusic:stop() 
+    end 
+
+    backgroundMusic = love.audio.newSource("Assets/Audio/Music.wav", "stream")
+    backgroundMusic:setVolume(0.1)     
+    backgroundMusic:setLooping(true)
+    backgroundMusic:play()
+end
+

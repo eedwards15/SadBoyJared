@@ -1,4 +1,6 @@
 collectables = {}
+collectables.found = 0 
+collectables.total = 0 
 
 function spawn_collectable(x,y)
     local collectable = {}
@@ -8,6 +10,7 @@ function spawn_collectable(x,y)
     collectable.animation = anim8.newAnimation(collectable.grid('1-1',1),1)
     collectable.collected = false
     table.insert(collectables,collectable)
+    collectables.total = collectables.total + 1
 end
 
 function collectable_update(dt)
@@ -22,6 +25,7 @@ function collectable_update(dt)
         local c = collectables[i]
         if c.collected == true then 
             table.remove(collectables,i)
+            collectables.found = collectables.found + 1
         end
     end   
 end 
