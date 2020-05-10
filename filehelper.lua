@@ -10,5 +10,5 @@ function load_save_data()
 end 
 
 function save_data()
-    love.filesystem.write(save_data.filename,table.show(saveData,"saveData"))
+    --love.filesystem.write(save_data.filename,table.show(saveData,"saveData"))
 end 
