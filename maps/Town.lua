@@ -1,0 +1,360 @@
+return {
+  version = "1.2",
+  luaversion = "5.1",
+  tiledversion = "1.3.3",
+  orientation = "orthogonal",
+  renderorder = "right-down",
+  width = 20,
+  height = 20,
+  tilewidth = 33,
+  tileheight = 33,
+  nextlayerid = 8,
+  nextobjectid = 175,
+  properties = {},
+  tilesets = {
+    {
+      name = "Rpg",
+      firstgid = 1,
+      tilewidth = 33,
+      tileheight = 33,
+      spacing = 0,
+      margin = 0,
+      columns = 15,
+      image = "../../RPGMurderInvestigation/Assets/Castle2.png",
+      imagewidth = 512,
+      imageheight = 512,
+      tileoffset = {
+        x = 0,
+        y = 0
+      },
+      grid = {
+        orientation = "orthogonal",
+        width = 33,
+        height = 33
+      },
+      properties = {},
+      terrains = {},
+      tilecount = 225,
+      tiles = {}
+    },
+    {
+      name = "RPG 2",
+      firstgid = 226,
+      filename = "../../RPGMurderInvestigation/maps/RPG 2.tsx",
+      tilewidth = 32,
+      tileheight = 32,
+      spacing = 0,
+      margin = 0,
+      columns = 16,
+      image = "../../RPGMurderInvestigation/Assets/Castle2.png",
+      imagewidth = 512,
+      imageheight = 512,
+      tileoffset = {
+        x = 0,
+        y = 0
+      },
+      grid = {
+        orientation = "orthogonal",
+        width = 32,
+        height = 32
+      },
+      properties = {},
+      terrains = {},
+      tilecount = 256,
+      tiles = {}
+    },
+    {
+      name = "RPG 3",
+      firstgid = 482,
+      filename = "../../RPGMurderInvestigation/maps/RPG 3.tsx",
+      tilewidth = 32,
+      tileheight = 32,
+      spacing = 0,
+      margin = 0,
+      columns = 8,
+      image = "../../RPGMurderInvestigation/Assets/magecity.png",
+      imagewidth = 256,
+      imageheight = 1450,
+      tileoffset = {
+        x = 0,
+        y = 0
+      },
+      grid = {
+        orientation = "orthogonal",
+        width = 32,
+        height = 32
+      },
+      properties = {},
+      terrains = {},
+      tilecount = 360,
+      tiles = {}
+    }
+  },
+  layers = {
+    {
+      type = "tilelayer",
+      id = 5,
+      name = "Scene",
+      x = 0,
+      y = 0,
+      width = 20,
+      height = 20,
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      properties = {},
+      encoding = "base64",
+      data = "ogEAAKMBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAApAEAAKIBAACiAQAAowEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACkAQAAogEAAKIBAACjAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAKQBAACiAQAAogEAAKMBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAApAEAAKIBAACiAQAAowEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACkAQAAogEAAKIBAACjAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACiAQAAogEAAMIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAxAEAAKIBAACiAQAAogEAAJkBAACZAQAAmQEAAJkBAACZAQAAmQEAAJkBAACZAQAAmQEAAJkBAACZAQAAmQEAAJkBAACZAQAAmQEAAJkBAACiAQAAogEAAKIBAACiAQAAmQEAAJkBAACZAQAAmQEAAJkBAACZAQAAmQEAAIsBAACMAQAAmQEAAJkBAACZAQAAmQEAAJkBAACZAQAAmQEAAKIBAACiAQAAogEAAKIBAACZAQAAmQEAAJkBAACZAQAAmQEAAJkBAACZAQAAmwEAAJwBAACZAQAAmQEAAJkBAACZAQAAmQEAAJkBAACZAQAAogEAAKIBAACiAQAAogEAAKMBAACSAQAAkgEAAJIBAACSAQAAmAEAAJkBAACZAQAAmQEAAJkBAACaAQAAkgEAAJIBAACSAQAAkgEAAKQBAACiAQAAogEAAKIBAACyAQAAkgEAAJIBAACSAQAAkgEAAJIBAACYAQAAmQEAAJkBAACZAQAAmQEAAJoBAACSAQAAkgEAAJIBAACSAQAAkgEAALQBAACiAQAAogEAAKMBAACSAQAAkgEAAJIBAACSAQAAkgEAAJgBAACZAQAAmQEAAJkBAACZAQAAmgEAAJIBAACSAQAAkgEAAJIBAACSAQAApAEAAKIBAACiAQAAowEAAJIBAACSAQAAkgEAAJIBAACSAQAAmAEAAJkBAACZAQAAmQEAAJkBAACaAQAAkgEAAJIBAACSAQAAkgEAAJIBAACkAQAAogEAAKIBAACjAQAAkgEAAJIBAACSAQAAkgEAAJIBAACYAQAAmQEAAJkBAACZAQAAmQEAAJoBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACiAQAAogEAAKMBAACSAQAAkgEAAJIBAACSAQAAkgEAAJgBAACZAQAAmQEAAJkBAACZAQAAmgEAAJIBAACSAQAAkgEAAJIBAACSAQAApAEAAKIBAACyAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAmAEAAJkBAACZAQAAmQEAAJkBAACaAQAAkgEAAJIBAACSAQAAkgEAAJIBAACSAQAAtAEAAKMBAACSAQAAowEAAJIBAACSAQAAkgEAAJIBAACYAQAAmQEAAJkBAACZAQAAmQEAAJoBAACSAQAAkgEAAJIBAACSAQAAkgEAAJIBAACkAQAAowEAAJIBAACjAQAAkgEAAJIBAACSAQAAkgEAAJgBAACZAQAAmQEAAJkBAACZAQAAmgEAAJIBAACSAQAAkgEAAJIBAACSAQAAkgEAAKQBAADDAQAAwwEAAMMBAADDAQAAwwEAAMMBAADDAQAAqAEAAKkBAACpAQAAqQEAAKkBAACqAQAAwwEAAMMBAADDAQAAwwEAAMMBAADDAQAAxAEAAA=="
+    },
+    {
+      type = "objectgroup",
+      id = 6,
+      name = "EnemyPath",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      draworder = "topdown",
+      properties = {},
+      objects = {}
+    },
+    {
+      type = "objectgroup",
+      id = 4,
+      name = "Start",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      draworder = "topdown",
+      properties = {},
+      objects = {
+        {
+          id = 173,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 300.025,
+          y = 559.55,
+          width = 60.3356,
+          height = 62.8151,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      id = 2,
+      name = "Platform",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      draworder = "topdown",
+      properties = {},
+      objects = {
+        {
+          id = 143,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2688.8,
+          y = -611.979,
+          width = 0,
+          height = 13.0208,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 160,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 309.117,
+          y = 223.444,
+          width = 41.0999,
+          height = 92.6194,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 163,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 526.773,
+          y = 195.658,
+          width = 61.9392,
+          height = 67.7279,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 164,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 430.68,
+          y = 137.771,
+          width = 61.9392,
+          height = 127.352,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 165,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 527.352,
+          y = 131.983,
+          width = 63.6758,
+          height = 135.456,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 166,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 430.101,
+          y = 131.983,
+          width = 160.347,
+          height = 64.8336,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 167,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = -3.94882,
+          y = -4.73859,
+          width = 36.3292,
+          height = 544.148,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 168,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 627.451,
+          y = -3.73483,
+          width = 33.6134,
+          height = 543.417,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 169,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = -5.60224,
+          y = -7.46965,
+          width = 666.667,
+          height = 16.8067,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 170,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = -3.25203,
+          y = 540.65,
+          width = 8.13008,
+          height = 122.764,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 171,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 652.033,
+          y = 539.837,
+          width = 9.7561,
+          height = 123.577,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 172,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 5.60224,
+          y = 649.86,
+          width = 645.658,
+          height = 14.0056,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      id = 3,
+      name = "Coins",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      draworder = "topdown",
+      properties = {},
+      objects = {
+        {
+          id = 174,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 37.1932,
+          y = 66.1212,
+          width = 45.4583,
+          height = 47.1113,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
+    },
+    {
+      type = "tilelayer",
+      id = 1,
+      name = "Foreground",
+      x = 0,
+      y = 0,
+      width = 20,
+      height = 20,
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      properties = {},
+      encoding = "base64",
+      data = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJoCAACbAgAAmwIAAJsCAACcAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAogIAAKMCAACjAgAAowIAAKQCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACqAgAAqwIAAKsCAACrAgAArAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAjgEAAI8BAAAAAAAAAAAAAAICAAAGAgAAKAMAAAYCAAAEAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACeAQAAnwEAAAAAAAAAAAAAAgIAAAMCAAAwAwAAAwIAAAQCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAK4BAACvAQAAAAAAAAAAAAAAAAAAAAAAACECAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvgEAAL8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
+    }
+  }
+}
