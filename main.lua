@@ -19,7 +19,7 @@ function init()
     require('player')
     require('helpers')
     require('enemies')
-
+    require('menu')
 end 
 
 
@@ -27,17 +27,29 @@ function love.load()
     init()
     get_total_levels()
 
-
     saveData = {}
     saveData.bestTime = 999
 
     load_save_data()    
 
+
+    table.insert(menu.buttons, newButton("Start Game", 
+    function()
+        gameState = 2
+        HideMenu()
+        timer = 0 
+        love.graphics.setColor(255,255,255,1)
+
+    end))
+    table.insert(menu.buttons, newButton("Exit", function() love.event.quit(0) end))
+
     gameMap = sti(map_loader.levels[map_loader.current_level])
     load_level()
+
 end
 
 function love.update(dt)
+    UpdateMenu()
     level_complete()
 
     world:update(dt)
@@ -71,38 +83,39 @@ function love.update(dt)
 end 
 
 function love.draw()
-    cam:attach()
-
-    collectable_draw() 
-    player.animation:draw(player.sprite, player.body:getX(),player.body:getY(),nil,player.direction,1,sprite.player_sprite:getWidth()/2, sprite.player_sprite:getHeight()/2)
-    gameMap:drawLayer(gameMap.layers[map_loader.layers.foreground])
-    gameMap:drawLayer(gameMap.layers[map_loader.layers.scene])
-
-    enemies_draw() 
-    cam:detach()
 
     if gameState == 1 then 
-        love.graphics.setFont(myfont)
-        love.graphics.printf("Press any key to begin!", 0, 50, love.graphics.getWidth(), "center")
-        love.graphics.printf("Best Time " .. saveData.bestTime, 0, 150, love.graphics.getWidth(), "center")
+        ShowMenu()
+        DrawMenu()
     end 
+    
+    if gameState == 2 then 
+        cam:attach()
+        collectable_draw() 
+        player.animation:draw(player.sprite, player.body:getX(),player.body:getY(),nil,player.direction,1,sprite.player_sprite:getWidth()/2, sprite.player_sprite:getHeight()/2)
+        gameMap:drawLayer(gameMap.layers[map_loader.layers.foreground])
+        gameMap:drawLayer(gameMap.layers[map_loader.layers.scene])
+        enemies_draw() 
+        cam:detach()
 
-    love.graphics.print("Time: " ..  math.floor(timer) ,  10, 20)
-    love.graphics.print("Found: " .. collectables.found, 230, 20)
-    love.graphics.print("Total: " .. collectables.total, 400, 20)
+        love.graphics.print("Time: " ..  math.floor(timer) ,  10, 20)
+        love.graphics.print("Found: " .. collectables.found, 230, 20)
+        love.graphics.print("Total: " .. collectables.total, 400, 20)
+    end 
 end 
 
 function love.keypressed(key,scancode,isrepeat)
-    if key == "space" and player.grounded == true then 
+    if key == "j" and player.grounded == true then 
         player.body:applyLinearImpulse(0,-2500)
         audio.player.jump:setVolume(1.3)
         audio.player.jump:play()
     end 
 
-    if gameState == 1 then 
-        gameState = 2
-        timer = 0 
+    if key == "escape" then 
+        gameState = 1
     end 
+
+    MenuKeyPressed(key)
 end
 
 function beginContact(a,b,coll)
