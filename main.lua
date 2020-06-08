@@ -116,7 +116,9 @@ function love.keypressed(key,scancode,isrepeat)
         gameState = 1
     end 
 
-    MenuKeyPressed(key)
+    if gameState == 1 then 
+        MenuKeyPressed(key)
+    end
 end
 
 function beginContact(a,b,coll)
