@@ -1,5 +1,5 @@
 function init()
-    love.window.setMode(320,240)
+    love.window.setMode(900,700)
     love.window.setTitle("Sad Boy Jared")
     love.graphics.setBackgroundColor(0,214,255)
 
@@ -14,7 +14,6 @@ function init()
     sti = require("Libs.Simple-Tiled-Implementation-master/sti")
     cameraFile = require("Libs.hump-master.camera")
     cam = cameraFile()
-    cam:zoom(.22)
     require('filehelper')
     require('map')
     require('player')
@@ -106,7 +105,7 @@ function love.draw()
 end 
 
 function love.keypressed(key,scancode,isrepeat)
-    if key == "j" and player.grounded == true then 
+    if key == "space" and player.grounded == true then 
         player.body:applyLinearImpulse(0,-2500)
         audio.player.jump:setVolume(1.3)
         audio.player.jump:play()
