@@ -84,7 +84,7 @@ function MenuKeyPressed( key )
         PrevMenuItem()
     end 
 
-    if (key == "space" or key == "j") and menu.inputtype == "keyboard" then 
+    if (key == "space" or key == "j" or key == "enter") and menu.inputtype == "keyboard" then 
         menu.buttons[menu.currentIndex].fn()
     end 
  end
